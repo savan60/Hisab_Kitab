@@ -24,6 +24,30 @@ class Sqlite():
         
         self.con.commit()
 
+    def find_id_by_username(self,username):
+        cursorObj = self.con.cursor()
+        names=cursorObj.execute('Select p_id from personal_details where user_name=?',(username,))
+        for i in names:
+            return i[0]
+        self.con.commit()
+
+    def find_email_by_username(self,username):
+        cursorObj = self.con.cursor()
+        names=cursorObj.execute('Select user_email from personal_details where user_name=?',(username,))
+        for i in names:
+            return i[0]
+        self.con.commit()
+
+    def find_if_username_exist(self,username):
+        cursorObj = self.con.cursor()
+        names=cursorObj.execute('Select user_name from personal_details')
+        for i in names:
+            for j in i:
+                if username==j:
+                    return True
+        return False
+        self.con.commit()
+
     def check_user(self,name):
         cursorObj = self.con.cursor()
         names=cursorObj.execute('Select user_name from personal_details')
@@ -41,7 +65,9 @@ class Sqlite():
         else:
             return 1
         self.con.commit()
-#name=input("name of user")
+# name=input("name of user")
+# sq=Sqlite()
+# sq.find_id(name)
 #entities=(1,'savan','matariysavanh@gmail.com')
 #con = sql_connection()
 #insert_user(con)

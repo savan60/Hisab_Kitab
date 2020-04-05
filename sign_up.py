@@ -4,7 +4,7 @@ from Face_Recognise import Face_Recognize
 import uuid
 import os
 class Sign_up():
-    def __init__(self):
+    def sign_up(self):
         # 1) Functions variables
         ob=Sqlite()
         #ob.sql_table()
@@ -43,4 +43,7 @@ class Sign_up():
             li.append(user_name)
             li.append(email)
             ob.insert_user(li)
+            return user_name
             print("Signed up Successfully")
+        else:
+            return ""

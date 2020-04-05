@@ -13,5 +13,5 @@ class Log_in():
             t=int(input("1.Face Recognition "))
             if t==1:
                 o.login(user_name)
-                return 1
-        return 0
+                return user_name
+        return ""
