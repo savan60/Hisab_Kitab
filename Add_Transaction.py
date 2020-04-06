@@ -28,11 +28,11 @@ class Add_transaction():
                 lis=(trans_id,self.sq.find_id_by_username(user_name),self.sq.find_id_by_username(transaction_to),amount,amount_owe,description, datetime.datetime.now(),'N')
                 self.sq_trans.insert_transaction(lis)
                 print("Transaction Completed")
-                message="From: "+ user_name+""" <from@fromdomain.com> To: """ + transaction_to+ """<to@todomain.com>
-Subject: """+description + "Total Amount : "+ str(amount) +" Amount to pay:"+str(amount_owe)
-                #message="From: "+user_name+" To: "+transaction_to+"\ndescription: "+description+"\nTotal amount: "+str(amount)+"\nAmount to pay: "+str(amount_owe)
-                self.mail.send_mail(self.sq.find_email_by_username(transaction_to),user_name,message)
-                print("Message sent")
+#                 message="From: "+ user_name+""" <from@fromdomain.com> To: """ + transaction_to+ """<to@todomain.com>
+# Subject: """+description + "Total Amount : "+ str(amount) +" Amount to pay:"+str(amount_owe)
+#                 #message="From: "+user_name+" To: "+transaction_to+"\ndescription: "+description+"\nTotal amount: "+str(amount)+"\nAmount to pay: "+str(amount_owe)
+#                 self.mail.send_mail(self.sq.find_email_by_username(transaction_to),user_name,message)
+#                 print("Message sent")
             else:
                 print("Invalid input")
         else:

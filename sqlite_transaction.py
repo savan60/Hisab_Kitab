@@ -1,17 +1,17 @@
 import sqlite3
 import datetime
 from sqlite3 import Error
-
+from sqliteHelper import Sqlite
 
 class Sqlite_trans():
     def __init__(self):
+        self.sq=Sqlite()
         try:
             self.con = sqlite3.connect('mydatabase.db')
         except Error:
             print(Error)
 
     def sql_table(self):
-
         cursorObj = self.con.cursor()
 
         cursorObj.execute(
@@ -27,8 +27,35 @@ class Sqlite_trans():
 
         self.con.commit()
 
+    def customized_transaction(self,user_id):
+        cursorObj = self.con.cursor()
+        names=cursorObj.execute('Select * from transactions_detail where from_p_id=? or to_p_id=? and status_tran=?',(user_id,user_id,'N',))
+        di={}
+        for i in names: 
+            if i[1]==user_id: 
+                if i[2] in di.keys():
+                    di[i[2]]['Amount']+=i [3]
+                    di[i[2]]['Amount_owe' ]+=i[4]
+                else: 
+                    di[i[2]]={} 
+                    di[i[2]]['Amount']=i[3]
+                    di[i[2]]['Amount_owe']=i[4]
+            elif i[2]==user_id: 
+                if i[1] in di.keys(): 
+                    di[i[1]]['Amount']+=i[3]
+                    di[i[1]]['Amount_owe']-=i[4]
+                else:
+                    di[i[1]]={}
+                    di[i[1]]['Amount']=i[3]
+                    di[i[1]]['Amount_owe']=0-i[4]
+        return di
+        self.con.commit()
+    def my_transactions(self,user_id):
+        cursorObj = self.con.cursor()
+        names=cursorObj.execute('Select * from transactions_detail where from_p_id=? or to_p_id=? and status_tran=?',(user_id,user_id,'N',))
+        return list(names)
 
 # sq = Sqlite_trans()
-# sq.sql_table()
+# sq.my_transactions("3f79696e-2f95-4f05-a06a-6b046c0ca95b")
 # ent=("567","2344","4567",5500,"it's trial",datetime.datetime.now(),"F")
 # sq.insert_user(ent)

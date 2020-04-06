@@ -3,6 +3,7 @@ from sqliteHelper import Sqlite
 from Face_Recognise import Face_Recognize
 import uuid
 import os
+
 class Sign_up():
     def sign_up(self):
         # 1) Functions variables
@@ -32,8 +33,9 @@ class Sign_up():
                 t=x.verify_email(email)
             
         # 4) Face_Recognition Verification
-        data_path='E:/python projects/python face recognition/user_photo'
+        data_path='E:/python projects/python face recognition/user_photo/'
         os.mkdir(data_path+user_name)
+        print("Directory is formed")
         u=face.Signup(user_name)
 
         if u==1:
