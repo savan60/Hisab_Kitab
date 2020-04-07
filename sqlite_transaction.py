@@ -54,8 +54,27 @@ class Sqlite_trans():
         cursorObj = self.con.cursor()
         names=cursorObj.execute('Select * from transactions_detail where from_p_id=? or to_p_id=? and status_tran=?',(user_id,user_id,'N',))
         return list(names)
+        self.con.commit()
 
+    def particular_trans(self,user_id,to_id):
+        cursorObj = self.con.cursor()
+        names=cursorObj.execute('Select * from transactions_detail where (from_p_id=? or from_p_id=? )and (to_p_id=? or to_p_id=? ) and status_tran=?',(to_id,user_id,to_id,user_id,'N',))
+        # for i in names:
+        #     print(i)
+        return list(names)
+        self.con.commit()
+
+    def settle_up(self,user_id,to_id):
+        cursorObj = self.con.cursor()
+        cursorObj.execute('UPDATE transactions_detail set status_tran=? where (from_p_id=? or from_p_id=? )and (to_p_id=? or to_p_id=? )',("C",user_id,to_id,user_id,to_id))
+        self.con.commit()
+
+    def delete_trans(self,t_id):
+        cursorObj = self.con.cursor()
+        cursorObj.execute('DELETE from transactions_detail where t_id=?',(t_id,))
+        print("deleted")
+        self.con.commit()
 # sq = Sqlite_trans()
-# sq.my_transactions("3f79696e-2f95-4f05-a06a-6b046c0ca95b")
+# sq.particular_trans("3f79696e-2f95-4f05-a06a-6b046c0ca95b","b079f6d8-a302-4bfd-8f1c-d6e9980850af")
 # ent=("567","2344","4567",5500,"it's trial",datetime.datetime.now(),"F")
 # sq.insert_user(ent)

@@ -14,6 +14,7 @@ sq=Sqlite()
 sign=Sign_up()
 add_trans=Add_transaction()
 customized=Customized_transaction()
+
 username=""
 my_tran=My_transactions()
 flag=-1

@@ -3,6 +3,7 @@ from sqliteHelper import Sqlite
 import datetime
 import pandas as pd
 
+
 class My_transactions():
     def __init__(self):
         self.sq_trans=Sqlite_trans()
@@ -25,3 +26,10 @@ class My_transactions():
             if i[7]=='N':
                 print("Incomplete")
             print("\n\n")
+            inp=input("1.Delete Transaction 2.continue")
+            if inp=="1":
+                self.sq_trans.delete_trans(i[0])
+                print("Deleted")
+            
+            
+            
