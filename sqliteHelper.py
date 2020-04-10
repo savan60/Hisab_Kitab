@@ -64,6 +64,7 @@ class Sqlite():
             for j in i:
                 print(j)
                 if name==j:
+                    print("here")
                     flag=-1
                     break
             if flag==-1:

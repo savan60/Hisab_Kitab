@@ -99,7 +99,7 @@ class Face_Recognize():
                     display_string=str(confidence)+"% confidence it is user"
                 cv2.putText(image,display_string,(100,120),cv2.FONT_HERSHEY_COMPLEX,1,(250,120,255),2)
 
-                if confidence>=80:
+                if confidence>=75:
                     cv2.putText(image,"Unlocked",(250,450),cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
                     break
                     cv2.imshow("Face Cropper",image)

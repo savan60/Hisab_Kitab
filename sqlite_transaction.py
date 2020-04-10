@@ -29,7 +29,7 @@ class Sqlite_trans():
 
     def customized_transaction(self,user_id):
         cursorObj = self.con.cursor()
-        names=cursorObj.execute('Select * from transactions_detail where from_p_id=? or to_p_id=? and status_tran=?',(user_id,user_id,'N',))
+        names=cursorObj.execute('Select * from transactions_detail where (from_p_id=? or to_p_id=?) and status_tran=?',(user_id,user_id,'N',))
         di={}
         for i in names: 
             if i[1]==user_id: 
@@ -53,7 +53,9 @@ class Sqlite_trans():
     def my_transactions(self,user_id):
         cursorObj = self.con.cursor()
         names=cursorObj.execute('Select * from transactions_detail where from_p_id=? or to_p_id=? and status_tran=?',(user_id,user_id,'N',))
-        return list(names)
+        na=list(names)
+        na.reverse()
+        return na
         self.con.commit()
 
     def particular_trans(self,user_id,to_id):
@@ -61,7 +63,9 @@ class Sqlite_trans():
         names=cursorObj.execute('Select * from transactions_detail where (from_p_id=? or from_p_id=? )and (to_p_id=? or to_p_id=? ) and status_tran=?',(to_id,user_id,to_id,user_id,'N',))
         # for i in names:
         #     print(i)
-        return list(names)
+        na=list(names)
+        na.reverse()
+        return na
         self.con.commit()
 
     def settle_up(self,user_id,to_id):

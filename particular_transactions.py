@@ -15,9 +15,7 @@ class Particular_transactions():
             print("Total Amount: ",i[3])
             print("Amount: ",i[4])
             print("Detail: ",i[5])
-            dat=pd.to_datetime(i[6])
-            print(dat)
-            c=datetime.datetime.now()-dat
+            c=datetime.datetime.now()-pd.to_datetime(i[6])
             d=str(c.days)
             if(d=='0'):
                 print("today")
