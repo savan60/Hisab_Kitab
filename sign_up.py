@@ -38,7 +38,16 @@ class Sign_up():
             
         # 4) Face_Recognition Verification
         return "Taking photos"
-        data_path='E:/python projects/python face recognition/user_photo/'
+        data_path='C:/Users/Public/'
+        flag=0
+        for i in os.listdir(data_path):
+            if i=="Hisab Kitab":
+                flag=-1
+        if flag==0:
+            os.mkdir(data_path+"Hisab Kitab")
+            os.mkdir(data_path+"Hisab Kitab/user_photo")
+        data_path='C:/Users/Public/Hisab Kitab/user_photo/'
+        #data_path='E:/python projects/python face recognition/user_photo/'
         os.mkdir(data_path+user_name)
         print("Directory is formed")
         u=face.Signup(user_name)
