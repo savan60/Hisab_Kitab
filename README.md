@@ -67,18 +67,23 @@ And all other files accessed in this we have discussed above individually.
 Only one limitation is found that we can add many peoples transactions but can't make a group rather we need to select individual person who are part of that transaction.
 
 # Libraries Used:
-1.Pandas<br/>
+1.sqlite3<br/>
 2.OpenCV<br/>
-3.Numpy<br/>
+3.smtplib<br/>
 4.Tkitner<br/>
 5.Datetime<br/>
 6.uuid<br/>
 7.dns.resolver<br/>
 8.re<br/>
 9.socket<br/>
-10.smtplib<br/>
-11.sqlite3<br/>
+10.Numpy<br/>
+11.Pandas<br/>
 12.os<br/>
 
 # Video
 Here we have attached one video which explains whole output with individual parts like how to signup, login, recognize the face, add transaction, delete transaction, settle up, displaying all transaction.
+
+# Database photos
+Here in these project as we are using sqlite database, we have uploaded the screenshots of table. There are two tables:<br/>
+1) Personal Details
+2)Transaction Details
