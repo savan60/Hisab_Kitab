@@ -35,7 +35,6 @@ class Sqlite():
         cursorObj = self.con.cursor()
         names=cursorObj.execute('Select user_name from personal_details where p_id=?',(p_id,))
         for i in names:
-            #print(i[0])
             return i[0]
         self.con.commit()
 
@@ -74,11 +73,3 @@ class Sqlite():
         else:
             return 1
         self.con.commit()
-# name=input("name of user")
-# sq=Sqlite()
-# sq.find_username_by_id("b079f6d8-a302-4bfd-8f1c-d6e9980850af")
-#entities=(1,'savan','matariysavanh@gmail.com')
-#con = sql_connection()
-#insert_user(con)
-#check_user(name)
-#sql_table(con)

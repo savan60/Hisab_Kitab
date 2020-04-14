@@ -6,10 +6,10 @@ import os
 
 class Face_Recognize():
     def __init__(self):
-        #self.data_path='E:/python projects/python face recognition/'
         self.face_cascade=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
     def face_extractor(self,img):
+        #Finding face in image
         gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
         faces=self.face_cascade.detectMultiScale(gray,scaleFactor=1.3,minNeighbors=5)
         
@@ -22,6 +22,7 @@ class Face_Recognize():
         return cropped_face
 
     def face_detection(self,img,size=0.5):
+        #Face detection
         gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
         faces=self.face_cascade.detectMultiScale(gray,1.3,5)
 
@@ -35,8 +36,11 @@ class Face_Recognize():
 
         return img,roi
 
+    #For sign_up
     def Signup(self,user_name):
         cap=cv2.VideoCapture(0)
+
+        #Counting number of images stored
         count=0
         while True:
             ret,frame=cap.read()
@@ -45,26 +49,26 @@ class Face_Recognize():
                 face=cv2.resize(self.face_extractor(frame),(200,200))
                 face=cv2.cvtColor(face,cv2.COLOR_BGR2GRAY)
 
-                file_name_path='C:/Users/Public/Hisab Kitab/user_photo/'+user_name+'/user'+str(count)+'.jpg'
+                file_name_path='./user_photo/'+user_name+'/user'+str(count)+'.jpg'
                 cv2.imwrite(file_name_path,face)
 
                 cv2.putText(face,str(count),(50,50),cv2.FONT_HERSHEY_COMPLEX,1,(0,250,0),2)
                 cv2.imshow('Face Cropper',face)
             else:
-                print("Face not Found")
                 pass
             if cv2.waitKey(1)==13 or count==100:
                 break
-            print("Count is ",count)
         cap.release()
         cv2.destroyAllWindows()
-        print("done")
         return 1
 
+    #For log in
     def login(self,user_name):
-        data_path='C:/Users/Public/Hisab Kitab/user_photo/'+user_name+"/"
+        data_path='./user_photo/'+user_name+"/"
+        #Fetching all files from folder of user
         onlyfiles=[f for f in listdir(data_path) if isfile(join(data_path,f))]
 
+        #Trainig the data
         Training_Data,Labels=[],[]
 
         for i, files in enumerate(onlyfiles):
@@ -84,8 +88,13 @@ class Face_Recognize():
         face_cascade=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
         cap=cv2.VideoCapture(0)
+
+        #Flag is for, if the face is matched
         flag=0
-        while True:
+
+        #To match the face for particular time i.e. upto k=200
+        k=0
+        while k!=200 and flag==0:
             ret,frame=cap.read()
 
             image,face=self.face_detection(frame)
@@ -99,45 +108,32 @@ class Face_Recognize():
                     display_string=str(confidence)+"% confidence it is user"
                 cv2.putText(image,display_string,(100,120),cv2.FONT_HERSHEY_COMPLEX,1,(250,120,255),2)
 
+                #if >=75% match found then unlocked
                 if confidence>=75:
+                    flag=-1
                     cv2.putText(image,"Unlocked",(250,450),cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
                     break
                     cv2.imshow("Face Cropper",image)
-                    
                 else:
                     cv2.putText(image,"Locked",(250,450),cv2.FONT_HERSHEY_COMPLEX,1,(0,0,255),2)
                     cv2.imshow("Face Cropper",image)
                     
             except:
-                cv2.putText(image,"File Not Found",(250,450),cv2.FONT_HERSHEY_COMPLEX,1,(0,255,255),2)
+                cv2.putText(image,"Face Not Found",(250,450),cv2.FONT_HERSHEY_COMPLEX,1,(0,255,255),2)
                 cv2.imshow("Face Cropper",image)
                 pass
-
+            
+            #Press enter to stop
             if cv2.waitKey(1)==13:
                 break
-        cap.release()
-        cv2.destroyAllWindows()
+            k+=1
+        if flag==-1:
+            cap.release()
+            cv2.destroyAllWindows()
+            return ""
+        else:
+            cap.release()
+            cv2.destroyAllWindows()
+            return "Face not matched"
+        
 
-# print("Welcome to Hisab Kitab")
-# while(True):
-#     input_user=int(input("1.Login 2.SignUp"))
-#     flag=0
-#     user_name=input("Username")
-#     for f in listdir(data_path):
-#         if f==user_name:
-#             print("User already present")
-#             flag=-1
-#     if input_user==1:
-#         face_recognize=int(input("1.Face Recognization 2.No"))
-#         if face_recognize==1:
-#             if flag==0:
-#                 print("No user name found, try signingup")
-#             else:
-#                 login()
-#                 print("Loged in")
-#     elif input_user==2:
-#         if flag==0:
-#             Signup()
-#             print("Signed in")
-#         else:
-#             print("User name is already present, try another name")

@@ -17,12 +17,4 @@ class Send_Email():
         msq.set_content(message)
         server.send_message(msq)
         server.quit()
-#receivers = '18bce208@nirmauni.ac.in'
 
-
-# try:
-#    smtpObj = smtplib.SMTP('localhost')
-#    smtpObj.sendmail(sender, receivers, message)
-#    print ("Successfully sent email")
-# except Exception:
-#    print ("Error: unable to send email")

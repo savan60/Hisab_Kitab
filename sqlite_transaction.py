@@ -13,7 +13,6 @@ class Sqlite_trans():
 
     def sql_table(self):
         cursorObj = self.con.cursor()
-
         cursorObj.execute(
             "CREATE TABLE transactions_detail(t_id text PRIMARY KEY, from_p_id text,to_p_id text,total_amount real,amount_owe real,description_trans text,date_trans datetime,status_tran char)")
 
@@ -50,6 +49,7 @@ class Sqlite_trans():
                     di[i[1]]['Amount_owe']=0-i[4]
         return di
         self.con.commit()
+
     def my_transactions(self,user_id):
         cursorObj = self.con.cursor()
         names=cursorObj.execute('Select * from transactions_detail where (from_p_id=? or to_p_id=?) and status_tran=?',(user_id,user_id,'N',))
@@ -61,8 +61,6 @@ class Sqlite_trans():
     def particular_trans(self,user_id,to_id,type):
         cursorObj = self.con.cursor()
         names=cursorObj.execute('Select * from transactions_detail where (from_p_id=? or from_p_id=? )and (to_p_id=? or to_p_id=? ) and status_tran=?',(to_id,user_id,to_id,user_id,type,))
-        # for i in names:
-        #     print(i)
         na=list(names)
         na.reverse()
         return na
@@ -78,7 +76,4 @@ class Sqlite_trans():
         cursorObj.execute('DELETE from transactions_detail where t_id=?',(t_id,))
         print("deleted")
         self.con.commit()
-# sq = Sqlite_trans()
-# sq.particular_trans("3f79696e-2f95-4f05-a06a-6b046c0ca95b","b079f6d8-a302-4bfd-8f1c-d6e9980850af")
-# ent=("567","2344","4567",5500,"it's trial",datetime.datetime.now(),"F")
-# sq.insert_user(ent)
+
