@@ -21,7 +21,11 @@ class Add_transaction():
             #description="Nothing"
             amount_owe = -1
             lis = []
-            if transaction_type == 1 or transaction_type ==2:
+            if not str(amount).isdigit:
+                return "Invalid input in Amount"
+            elif description=="":
+                return "Details is empty"
+            elif transaction_type == 1 or transaction_type ==2:
                 trans_id = str(uuid.uuid4())
                 if transaction_type==1:
                     amount_owe=amount/2
@@ -29,22 +33,7 @@ class Add_transaction():
                     amount_owe=amount
                 lis=(trans_id,self.sq.find_id_by_username(user_name),self.sq.find_id_by_username(transaction_to),amount,amount_owe,description, datetime.datetime.now(),'N')
                 self.sq_trans.insert_transaction(lis)
-                print("transaction done")
-#                 message="From: "+ user_name+""" <from@fromdomain.com> To: """ + transaction_to+ """<to@todomain.com>
-# Subject: """+description + "Total Amount : "+ str(amount) +" Amount to pay:"+str(amount_owe)
-#                 #message="From: "+user_name+" To: "+transaction_to+"\ndescription: "+description+"\nTotal amount: "+str(amount)+"\nAmount to pay: "+str(amount_owe)
-                
-#                 message="""From: From Person <from@fromdomain.com>
-# To: To Person <to@todomain.com>
-# MIME-Version: 1.0
-# Content-type: text/html
-# Subject: SMTP HTML e-mail test
-
-# This is an e-mail message to be sent in HTML format
-
-# <b>This is HTML message.</b>
-# <h1>This is headline.</h1>
-# """         
+                print("transaction done")   
                 message="Detail: "+description+"\n From: "+user_name+"\n Total Amount:"+str(amount)+"\n Amount to pay:"+str(amount_owe);
                 self.mail.send_mail(self.sq.find_email_by_username(transaction_to),user_name,message)
                 print("Message sent")

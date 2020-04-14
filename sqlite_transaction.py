@@ -27,9 +27,9 @@ class Sqlite_trans():
 
         self.con.commit()
 
-    def customized_transaction(self,user_id):
+    def customized_transaction(self,user_id,type):
         cursorObj = self.con.cursor()
-        names=cursorObj.execute('Select * from transactions_detail where (from_p_id=? or to_p_id=?) and status_tran=?',(user_id,user_id,'N',))
+        names=cursorObj.execute('Select * from transactions_detail where (from_p_id=? or to_p_id=?) and status_tran=?',(user_id,user_id,type,))
         di={}
         for i in names: 
             if i[1]==user_id: 
@@ -52,15 +52,15 @@ class Sqlite_trans():
         self.con.commit()
     def my_transactions(self,user_id):
         cursorObj = self.con.cursor()
-        names=cursorObj.execute('Select * from transactions_detail where from_p_id=? or to_p_id=? and status_tran=?',(user_id,user_id,'N',))
+        names=cursorObj.execute('Select * from transactions_detail where (from_p_id=? or to_p_id=?) and status_tran=?',(user_id,user_id,'N',))
         na=list(names)
         na.reverse()
         return na
         self.con.commit()
 
-    def particular_trans(self,user_id,to_id):
+    def particular_trans(self,user_id,to_id,type):
         cursorObj = self.con.cursor()
-        names=cursorObj.execute('Select * from transactions_detail where (from_p_id=? or from_p_id=? )and (to_p_id=? or to_p_id=? ) and status_tran=?',(to_id,user_id,to_id,user_id,'N',))
+        names=cursorObj.execute('Select * from transactions_detail where (from_p_id=? or from_p_id=? )and (to_p_id=? or to_p_id=? ) and status_tran=?',(to_id,user_id,to_id,user_id,type,))
         # for i in names:
         #     print(i)
         na=list(names)

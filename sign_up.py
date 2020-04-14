@@ -37,7 +37,7 @@ class Sign_up():
             t=x.verify_email(email)
             
         # 4) Face_Recognition Verification
-        return "Taking photos"
+        #return "Taking photos"
         data_path='C:/Users/Public/'
         flag=0
         for i in os.listdir(data_path):
@@ -51,7 +51,6 @@ class Sign_up():
         os.mkdir(data_path+user_name)
         print("Directory is formed")
         u=face.Signup(user_name)
-
         if u==1:
             user_id=str(uuid.uuid4())
             li=[]
@@ -59,7 +58,7 @@ class Sign_up():
             li.append(user_name)
             li.append(email)
             ob.insert_user(li)
-            return user_name
+            return ""
             print("Signed up Successfully")
         else:
-            return ""
+            return "Try Again"
