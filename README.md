@@ -85,5 +85,5 @@ Here we have attached one video which explains whole output with individual part
 
 # Database photos
 Here in these project as we are using sqlite database, we have uploaded the screenshots of table. There are two tables:<br/>
-1) Personal Details
+1)Personal Details</br>
 2)Transaction Details
