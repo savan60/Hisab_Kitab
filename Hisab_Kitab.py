@@ -56,7 +56,7 @@ class StartPage(tk.Frame):
         self.button2.pack(pady=10)
 
         #Move to SignUp page
-        self.button2=ttk.Button(self,text="Sign in",width=30,
+        self.button2=ttk.Button(self,text="Sign up",width=30,
                           command=lambda: controller.show_frame(SignUp))
         self.button2.pack(pady=10)
 
@@ -106,7 +106,7 @@ class SignUp(tk.Frame):
         self.controller=controller
 
         #Heading
-        self.label=tk.Label(self,text="Sign-in",font=LARGE_FONT)
+        self.label=tk.Label(self,text="Sign-up",font=LARGE_FONT)
         self.label.place(y=50,x=650)
 
         #Username
@@ -206,7 +206,7 @@ class Add_transaction(tk.Frame):
 
     def add_trans(self):
         #To add transaction to table
-        t=add_t.add_transaction(self.controller.user_name,self.with_you_and.get(),int(self.amount.get()),self.description.get(),self.v.get())
+        t=add_t.add_transaction(self.controller.user_name,self.with_you_and.get(),self.amount.get(),self.description.get(),self.v.get())
         
         #To check if any wrong with transaction
         if t=="":
